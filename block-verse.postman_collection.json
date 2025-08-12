@@ -1,0 +1,2006 @@
+{
+	"info": {
+		"_postman_id": "6ef5f174-c022-49b1-a8ea-f7fe8ee12292",
+		"name": "block-verse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8446353"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"let request_data = pm.request.body.formdata;\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    let res_data = response_data.data;\r",
+									"\r",
+									"    pm.collectionVariables.set(\"email\", res_data.email);\r",
+									"    pm.collectionVariables.set(\"api_token\", res_data.api_token);\r",
+									"}\r",
+									"\r",
+									"request_data.map(function (pair) {\r",
+									"    if (!pair.disabled && pair.key == \"password\") {\r",
+									"        pm.collectionVariables.set(\"password\", pair.value);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mirza",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "golamnabi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Mirza",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "golamnabi@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:30:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"You are logged in\",\n    \"data\": {\n        \"name\": \"Mirza\",\n        \"email\": \"golamnabi@gmail.com\",\n        \"updated_at\": \"2025-08-02T10:30:12.000000Z\",\n        \"created_at\": \"2025-08-02T10:30:12.000000Z\",\n        \"id\": 18,\n        \"api_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIwMTk4NmE0ZC0wMTdiLTcwODctOGUzZi1mOWVhM2UyZjI0ZDUiLCJqdGkiOiIyYzJhN2Y1ZTg2YjhmNzY2NzYyNTE0Njk2ZGZlNzBhZjljZTk3NTAzMGQ5YTc4YjZjZmM4ZGU3ZTk2MzExYmVlMGZhNTJmMzZjMTlhMmFhNyIsImlhdCI6MTc1NDEzMDYxMi4zODc0MTUsIm5iZiI6MTc1NDEzMDYxMi4zODc0MTgsImV4cCI6MTc4NTY2NjYxMi4zNjQzOTMsInN1YiI6IjE4Iiwic2NvcGVzIjpbXX0.QoIo8ElxtdyrOEFLGfXwwQikYsyWfqyqN5aYyzhG-Wv69mqj1YySmqiJb4KDSbThQeQ5PxvQXdUiwj0r6F_GPqsBWLxy9OGDbwk0olgU2he8HBktcqdp_DbqitibtIo6ucxZjfoIm_8g2NekDyITiujHYkP-RyNu3pcwUVE63pPkCkRJMasU6IeKmPk4JTGmpP015Ryi8YvvsKSTE9OJDWTCrcYhY5D5EpnjmPb_3Tuat_pTgeYALzFhz67sgjgHJqppyUsbLgNcPb7LZyWwmLkeRqmp18IcQKPAAThQaRHvAFb9KRf1NYxz34TbhXfxQBSrFOnsCu0RTfiUNJdYF1XTZQnE2zC-mxz_2lCe705o-ExhCHtnB6nT8VyVuImU-WwHnrMejl0FtND3726d6hLh9lg4XixhXNXRYvBYl8amzCKVu_seoGahg1ztmasjMeEeTLAl5mDjqJ89LjtOi-qcZAOyWFTzkOWqdqscokfQVmFB1CklHG4MFw8A5U72GamwT4P1LX5Dawz_QK3UX402LlqfPGaZhoKxfcbMtZJ1hT1YjdJS7H-u0wSPfAp7IStCZ3bcQ-2QINeeJT_NPR8zHrgfXegx6sjKF4ytAZIVj9dgxfzDmRLiJQ0h4kgeK8DXuNB6mXI7xfLUd2s8FCBtugQt3P0_Eq5biuLUomA\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"let request_data = pm.request.body.formdata;\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    let res_data = response_data.data;\r",
+									"\r",
+									"    pm.collectionVariables.set(\"email\", res_data.email);\r",
+									"    pm.collectionVariables.set(\"api_token\", res_data.api_token);\r",
+									"}\r",
+									"\r",
+									"request_data.map(function (pair) {\r",
+									"    if (!pair.disabled && pair.key == \"password\") {\r",
+									"        pm.collectionVariables.set(\"password\", pair.value);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:30:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"You are logged in\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\",\n        \"email_verified_at\": \"2025-08-02T10:21:14.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"api_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIwMTk4NmE0ZC0wMTdiLTcwODctOGUzZi1mOWVhM2UyZjI0ZDUiLCJqdGkiOiJlYzQyM2I2Zjc3MDYzMDA3ZmQ4M2RjM2IyYmQ4NjBlZjdkNTEzNDI5M2UzOTAzN2I4Nzg2N2NmZGE3MDc2MjI5OGM3ZjA0YzAzYTgxNjM4NyIsImlhdCI6MTc1NDEzMDYyMC44MjkxNjUsIm5iZiI6MTc1NDEzMDYyMC44MjkxNywiZXhwIjoxNzg1NjY2NjIwLjgxMzYxMSwic3ViIjoiMSIsInNjb3BlcyI6W119.gPmC7ioiv7cB0cEh9IGyePBuq4DNfeIhUR6UnjaMKQ03ZUnt0o6JGXCaOLXbQrBH4b7ZghyCLV3CuQfMTLfm9SKf_7KT60kfnKrflpnATFY9HsJDfedGSESr-K2Hwfp7mIl2gl3StOEs7kpy2_Ecn7T4wuewM_q_LE7nn4BJuRqUn1rnnVe-YIL-395qRdNVTO6_K3U_Dv84dNCYzkyPEcod7y70YPIaN8V5VxUaeZjBDX6Waz7bXqkP_abN_gfwW_Jx3ZnRMqaMskzm1H4p-4oX_bY8qsK4TbNE43i4nCXkCr6CVZAoTzAUlNn-ClJqI8MWzcPkFeDUlC_SONYj2A5tLu0olaajpj4cVSZxwOQRehbMtXa60YCSDQKmY17aAwumeZfNArJkFn5L1kVqnpdqPM0k_icuYLw0PvzUA1a2K37T8R8az7fv3xB_2ivxIUQB7LpqS3ZmKLS_YsRzb1bf5MoRGdJl8oE_tY4LsSRnAXAquZfKZBhJ4n-eB9ib-I9xu0AU-6aNa5f0NC-GbqtjXXBvCZlhatiPTtDiQss8VfViYu5HxSFMyQjYJgQM3cpSMePWmOplXy9fb7FOJg6Gu_t0TF78fq59sCEYmFfz2NejTn_PfHwUQK7KCUBAB29qU3ws0VhHM5xR8E_fRbiUXK2tXHOiBpGBy41mtIk\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:30:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Successfully logged out\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Author Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    pm.collectionVariables.set(\"api_token\", response_data.data.api_token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/log-in?role=author",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"log-in"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "author"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Author Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/log-in?role=author",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"log-in"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "author"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:30:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 1,\n    \"code\": 404,\n    \"msg\": \"Not found\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    pm.collectionVariables.set(\"api_token\", response_data.data.api_token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/log-in?role=admin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"log-in"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admin Login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/log-in?role=admin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"log-in"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:30:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Admin Login\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\",\n        \"email_verified_at\": \"2025-08-02T10:21:14.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"api_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIwMTk4NmE0ZC0wMTdiLTcwODctOGUzZi1mOWVhM2UyZjI0ZDUiLCJqdGkiOiI2Zjk2Mzc4OTcxM2UyOTM4ZjE2M2Y2NDg3MTJmNzAwMTg5NTRkYWM1YWYzNjUyY2FjZTQwMGMwZjdjNjQ5Y2JlN2E1ZGQ3NmEyMGQ5MTFmOCIsImlhdCI6MTc1NDEzMDY1NC4xMTY5OTcsIm5iZiI6MTc1NDEzMDY1NC4xMTY5OTksImV4cCI6MTc4NTY2NjY1NC4xMDMyNjYsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.nvrBUaVVq71E1VKWHiBMry_dL9ykdpuAPKtuoJDU7UpWotbNGnrMoBmrcFRLWaxNXi5asj4JMwk9YKEXhfUUrLgY8wEwmsxQ1IedQLxJ8n-GQ6PU-z5YFGKM0GFF5A-_lHAe81GOyZ8joQ94wcxEyRNOV2oe6A_CKWBGbPyUA-WCIJ_HoCiWvdDQbdAB1o00qkKlHLSaHGrXkegBM5NVNAxmbcTJHWsh0YJA6v4vtPlwiIPsNbeGSchopioBpKpCtw1oibFxkkwedl4YW_lyYArC2lheQSq__bpSbCxlOViv5ZaanrqwOaRfGOwJPj6KcN8YYBjya4GaM8fCBTkaBfveKmYNh854P5UjaespbSIkB7how587MLgKiquPlqWaeCBfbBM1cvG9NdhxkkIXMSg5YCI4jAbEClZ8ceNL6DueqVmiR0icDxHftl0iRpjckZFGCwUw14N8pj9822qQiMBQlNRIkJpCggo3GNVvj7biI9tqnz6lQUqPnj-TfH6KwFUsFPnvJMxWtrAWlXEp2toai-5zekELLDpNfmkUYTf2MZiNG2YbM0tVdmzD-IDDCqJWmLC5PHwWGNRn2rIlWBgJjhHdM_8nPbyI1REmfNp7Kbya88570F2Pr-TvoWmWpmW-UVVOAc0d6evnfxigVVj0ZmB8W4QVsr3vr51Etpo\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Editor Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    pm.collectionVariables.set(\"api_token\", response_data.data.api_token);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/log-in?role=editor",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"log-in"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "editor"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Editor Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/log-in?role=editor",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"log-in"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "editor"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:31:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 1,\n    \"code\": 404,\n    \"msg\": \"Not found\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "Editor Login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/log-in?role=editor",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"log-in"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "editor"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:32:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Editor Login\",\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Jena Heidenreich IV\",\n        \"email\": \"bertram69@example.com\",\n        \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"api_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIwMTk4NmE0ZC0wMTdiLTcwODctOGUzZi1mOWVhM2UyZjI0ZDUiLCJqdGkiOiJjYmU1ZjQ3ZGI1MzFhMmY2MWNkNGU5OTc1ZDU4OTA2MTAzMjUxYWE1ZTE5MTRlMGU5ZThmMzM2MTE1YThlNjliMmYxOTc3N2M2MzQxZmEyOCIsImlhdCI6MTc1NDEzMDczNy4xMzY4NywibmJmIjoxNzU0MTMwNzM3LjEzNjg3MiwiZXhwIjoxNzg1NjY2NzM3LjEyNTMyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.Ka85_j00U7QfOJ3iLtfLukzmUt4cdGPG96P0_Olj-VXgBw_DENArDef246cwB43h5Kjs9CxBgfjnu93voV9ncMmom0lnOjUBs_gl42wPYK-qgUFamzmSKlUdmttMLXpXerwFv8evtUaZdh6HDcKPerVsw826mPaU17OWxllMQKsJouUPQNfmlt1gXd_lcChtLh736G7HIg8z0Ur7hsQsOpYLXURpxOBL9_XkOtk0dr2KhECE3Rboolu0m59xwROjbbNuO8WeFj7AtS_h-Sux-qFvijH7TkQFi7KED66IMDUOYDGQyhtwHsKeG7G2Nyj4q9cDiUxwitvRdNftwjMLmPv5a37g3Q5P1B3StFnKVMP8N43EtmxMgBI2JBx6p0EPqKctB2ICdYmJr2JhxRQsnhW6hDpp9j51HLHHCSRatKMeTYc0Llt-qHxkmubkStlP67VGYjv4k7dKZdGB8W98aIc1V3FSsKa6qW1oSfoSbmJq-IQvgyDc6SXiFnbaKHuFWw_R3Cfn4DFO48s1O37niqCEWVbR6PeYKEAU7FeHFfF6BMF57X1O8s6VU94ykPhJrQ4smg0GFvErtAzbSu5UsFuMzDh3g0gmqRGSwG4wuS-zz9hldkEdDXLQFEfiB7Kc8-8EVe_tTSPh6MEA3M-W8UHqu7BvXSgc4J2msdvgeW8\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Fetch All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:31:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Users fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Test User\",\n            \"email\": \"test@example.com\",\n            \"email_verified_at\": \"2025-08-02T10:21:14.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Jena Heidenreich IV\",\n            \"email\": \"bertram69@example.com\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Mrs. Bessie Halvorson\",\n            \"email\": \"swilderman@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Eldon Jacobi\",\n            \"email\": \"vernice76@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Nathanael Johnson\",\n            \"email\": \"saul.waters@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Jaylon Balistreri\",\n            \"email\": \"minerva.kuhn@example.com\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Kianna Sawayn\",\n            \"email\": \"jayne86@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Jettie Greenfelder\",\n            \"email\": \"dschaefer@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Terrill Boyer\",\n            \"email\": \"hkertzmann@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Ethyl Metz\",\n            \"email\": \"llangosh@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Christian Lowe\",\n            \"email\": \"hfunk@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Novella O'Hara\",\n            \"email\": \"chandler.abbott@example.com\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 13,\n            \"name\": \"Estella Ziemann\",\n            \"email\": \"zhessel@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 14,\n            \"name\": \"Audra Romaguera\",\n            \"email\": \"abeier@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Jayden Sporer\",\n            \"email\": \"esther.wiza@example.net\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 16,\n            \"name\": \"Alessia Cruickshank\",\n            \"email\": \"runolfsson.taurean@example.org\",\n            \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n            \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n        },\n        {\n            \"id\": 18,\n            \"name\": \"Mirza\",\n            \"email\": \"golamnabi@gmail.com\",\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-08-02T10:30:12.000000Z\",\n            \"updated_at\": \"2025-08-02T10:30:12.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Own Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Own Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:31:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Profile fetched successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Test User\",\n        \"email\": \"test@example.com\",\n        \"email_verified_at\": \"2025-08-02T10:21:14.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"roles\": [\n            {\n                \"id\": 1,\n                \"title\": \"admin\",\n                \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n                \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n                \"pivot\": {\n                    \"user_id\": 1,\n                    \"role_id\": 1\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Find User has no Role",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"\r",
+									"    pm.collectionVariables.set(\"user_id\", response_data.data.id);\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/find-user-has-no-role",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"find-user-has-no-role"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find User has no Role",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/find-user-has-no-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"find-user-has-no-role"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:31:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"User fetched successfully\",\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Jena Heidenreich IV\",\n        \"email\": \"bertram69@example.com\",\n        \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Unauthorized Access",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/find-user-has-no-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"find-user-has-no-role"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:32:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This action is unauthorized.\",\n    \"exception\": \"Symfony\\\\Component\\\\HttpKernel\\\\Exception\\\\AccessDeniedHttpException\",\n    \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Exceptions\\\\Handler.php\",\n    \"line\": 673,\n    \"trace\": [\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Exceptions\\\\Handler.php\",\n            \"line\": 617,\n            \"function\": \"prepareException\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Pipeline.php\",\n            \"line\": 51,\n            \"function\": \"render\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Exceptions\\\\Handler\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 213,\n            \"function\": \"handleException\",\n            \"class\": \"Illuminate\\\\Routing\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings.php\",\n            \"line\": 50,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Routing\\\\Middleware\\\\SubstituteBindings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Auth\\\\Middleware\\\\Authenticate.php\",\n            \"line\": 63,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Auth\\\\Middleware\\\\Authenticate\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\sanctum\\\\src\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 26,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 169,\n            \"function\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\{closure}\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\sanctum\\\\src\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful.php\",\n            \"line\": 25,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Laravel\\\\Sanctum\\\\Http\\\\Middleware\\\\EnsureFrontendRequestsAreStateful\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 807,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 786,\n            \"function\": \"runRouteWithinStack\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 750,\n            \"function\": \"runRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Routing\\\\Router.php\",\n            \"line\": 739,\n            \"function\": \"dispatchToRoute\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 200,\n            \"function\": \"dispatch\",\n            \"class\": \"Illuminate\\\\Routing\\\\Router\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 169,\n            \"function\": \"Illuminate\\\\Foundation\\\\Http\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull.php\",\n            \"line\": 31,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\ConvertEmptyStringsToNull\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest.php\",\n            \"line\": 21,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings.php\",\n            \"line\": 51,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TransformsRequest\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\TrimStrings\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\ValidatePostSize.php\",\n            \"line\": 27,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePostSize\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance.php\",\n            \"line\": 109,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\PreventRequestsDuringMaintenance\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\HandleCors.php\",\n            \"line\": 61,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\HandleCors\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\TrustProxies.php\",\n            \"line\": 58,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\TrustProxies\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\InvokeDeferredCallbacks.php\",\n            \"line\": 22,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Middleware\\\\InvokeDeferredCallbacks\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Http\\\\Middleware\\\\ValidatePathEncoding.php\",\n            \"line\": 26,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 208,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Http\\\\Middleware\\\\ValidatePathEncoding\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Pipeline\\\\Pipeline.php\",\n            \"line\": 126,\n            \"function\": \"Illuminate\\\\Pipeline\\\\{closure}\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 175,\n            \"function\": \"then\",\n            \"class\": \"Illuminate\\\\Pipeline\\\\Pipeline\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Http\\\\Kernel.php\",\n            \"line\": 144,\n            \"function\": \"sendRequestThroughRouter\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Application.php\",\n            \"line\": 1219,\n            \"function\": \"handle\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Http\\\\Kernel\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\public\\\\index.php\",\n            \"line\": 20,\n            \"function\": \"handleRequest\",\n            \"class\": \"Illuminate\\\\Foundation\\\\Application\",\n            \"type\": \"->\"\n        },\n        {\n            \"file\": \"E:\\\\project\\\\block-verse\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\resources\\\\server.php\",\n            \"line\": 23,\n            \"function\": \"require_once\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Assign Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "role",
+									"value": "editor",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "author",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/{{user_id}}/assign-role",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"assign-role"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Assign Role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "role",
+											"value": "editor",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": "author",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/users/{{user_id}}/assign-role",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{user_id}}",
+										"assign-role"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:33:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Role assigned successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"Mrs. Bessie Halvorson\",\n        \"email\": \"swilderman@example.net\",\n        \"email_verified_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n        \"roles\": [\n            {\n                \"id\": 3,\n                \"title\": \"author\",\n                \"created_at\": \"2025-08-02T10:21:15.000000Z\",\n                \"updated_at\": \"2025-08-02T10:21:15.000000Z\",\n                \"pivot\": {\n                    \"user_id\": 3,\n                    \"role_id\": 3\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/articles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "No publish article",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/articles",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:39:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles fetched successfully\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "Published Article",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/articles",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:38:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"user_id\": 3,\n            \"title\": \"Author article title\",\n            \"body\": \"Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body.\",\n            \"is_published\": 1,\n            \"published_at\": null,\n            \"created_at\": \"2025-08-02T10:37:30.000000Z\",\n            \"updated_at\": \"2025-08-02T10:38:22.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"user_id\": 3,\n            \"title\": \"Author article title\",\n            \"body\": \"Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body.\",\n            \"is_published\": 1,\n            \"published_at\": null,\n            \"created_at\": \"2025-08-02T10:37:42.000000Z\",\n            \"updated_at\": \"2025-08-02T10:38:28.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Author article title",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Author article title",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/articles",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:34:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Article stored successfully\",\n    \"data\": {\n        \"title\": \"Author article title\",\n        \"body\": \"Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body.\",\n        \"user_id\": 3,\n        \"updated_at\": \"2025-08-02T10:34:48.000000Z\",\n        \"created_at\": \"2025-08-02T10:34:48.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Articles Mine",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response_data = pm.response.json();\r",
+									"\r",
+									"if (response_data && response_data.error === 0 && response_data.data != null) {\r",
+									"    let first_obj = response_data.data[0];\r",
+									"\r",
+									"    pm.collectionVariables.set(\"article_id\", first_obj.id);\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/articles/mine",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"mine"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Articles Mine",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/articles/mine",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles",
+										"mine"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:35:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles fetched successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 3,\n            \"title\": \"Author article title\",\n            \"body\": \"Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body. Author article body.\",\n            \"is_published\": 0,\n            \"published_at\": null,\n            \"created_at\": \"2025-08-02T10:34:48.000000Z\",\n            \"updated_at\": \"2025-08-02T10:34:48.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Articles Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Author article update",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/{{article_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"{{article_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Articles Update",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Author article update",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/articles/{{article_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles",
+										"{{article_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:35:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 3,\n        \"title\": \"Author article update\",\n        \"body\": \"Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update.\",\n        \"is_published\": 0,\n        \"published_at\": null,\n        \"created_at\": \"2025-08-02T10:34:48.000000Z\",\n        \"updated_at\": \"2025-08-02T10:35:37.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Articles Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/{{article_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"{{article_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized Access",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "User title 3 Update fdee",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "User title 4 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/articles/{{article_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles",
+										"{{article_id}}"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "date",
+									"value": "Sat, 02 Aug 2025 10:35:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title>Forbidden</title>\n        <style>\n            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}code{font-family:monospace,monospace;font-size:1em}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}code{font-family:Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-gray-400{--border-opacity:1;border-color:#cbd5e0;border-color:rgba(203,213,224,var(--border-opacity))}.border-t{border-top-width:1px}.border-r{border-right-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-xl{max-width:36rem}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.uppercase{text-transform:uppercase}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.tracking-wider{letter-spacing:.05em}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@-webkit-keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@-webkit-keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@keyframes ping{0%{transform:scale(1);opacity:1}75%,to{transform:scale(2);opacity:0}}@-webkit-keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}@-webkit-keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@keyframes bounce{0%,to{transform:translateY(-25%);-webkit-animation-timing-function:cubic-bezier(.8,0,1,1);animation-timing-function:cubic-bezier(.8,0,1,1)}50%{transform:translateY(0);-webkit-animation-timing-function:cubic-bezier(0,0,.2,1);animation-timing-function:cubic-bezier(0,0,.2,1)}}@media (min-width:640px){.sm\\:rounded-lg{border-radius:.5rem}.sm\\:block{display:block}.sm\\:items-center{align-items:center}.sm\\:justify-start{justify-content:flex-start}.sm\\:justify-between{justify-content:space-between}.sm\\:h-20{height:5rem}.sm\\:ml-0{margin-left:0}.sm\\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\\:pt-0{padding-top:0}.sm\\:text-left{text-align:left}.sm\\:text-right{text-align:right}}@media (min-width:768px){.md\\:border-t-0{border-top-width:0}.md\\:border-l{border-left-width:1px}.md\\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}\n        </style>\n        <style>\n            body {\n                font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n            }\n        </style>\n    </head>\n    <body class=\"antialiased\">\n        <div class=\"relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0\">\n            <div class=\"max-w-xl mx-auto sm:px-6 lg:px-8\">\n                <div class=\"flex items-center pt-8 sm:justify-start sm:pt-0\">\n                    <div class=\"px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider\">\n                        403                    </div>\n                    <div class=\"ml-4 text-lg text-gray-500 uppercase tracking-wider\">\n                        This action is unauthorized.                    </div>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>"
+						},
+						{
+							"name": "Articles Delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "User title 3 Update fdee",
+											"type": "text"
+										},
+										{
+											"key": "body",
+											"value": "User title 4 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. User title 3 body. ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/articles/{{article_id}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles",
+										"{{article_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:36:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles deleted successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Articles Published",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/articles/{{article_id}}/publish",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"articles",
+								"{{article_id}}",
+								"publish"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Articles Published",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/articles/{{article_id}}/publish",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"articles",
+										"{{article_id}}",
+										"publish"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Aug 2025 10:36:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": 0,\n    \"code\": 200,\n    \"msg\": \"Articles published successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 3,\n        \"title\": \"Author article update\",\n        \"body\": \"Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update. Author article update.\",\n        \"is_published\": true,\n        \"published_at\": null,\n        \"created_at\": \"2025-08-02T10:34:48.000000Z\",\n        \"updated_at\": \"2025-08-02T10:36:25.000000Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "api_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "article_id",
+			"value": ""
+		}
+	]
+}
